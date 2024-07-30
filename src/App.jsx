@@ -1,10 +1,14 @@
 import { useState } from 'react'
 import Logo from './assets/images/Logo.svg'
 import pizzaimg from './assets/images/Pizza Image.png'
+import margheritaLogo from './assets/images/Margherita-Traditional 1.png'
+import pepperoni from './assets/images/Pepperoni-Traditional 1.png'
+import carbonara from './assets/images/carbonara 2.jpg'
+import Chicken from './assets/images/Chicken BBQ.png'
 import { IoMdBasket, IoMdCall, IoIosSearch } from 'react-icons/io'
 import { GoArrowRight } from 'react-icons/go'
+import { GiChiliPepper } from 'react-icons/gi'
 import Select from 'react-select'
-import chroma from 'chroma-js'
 import './App.css'
 
 const options = [
@@ -31,7 +35,7 @@ function App() {
   return (
     <div className="font-manrope font-medium">
       <header>
-        <div className="containe flex justify-between items-center h-16 ">
+        <div className="container flex justify-between items-center h-16 ">
           <div className="w-[50%] flex ">
             <img src={Logo} alt="" className="cursor-pointer" />
             <Select
@@ -72,12 +76,408 @@ function App() {
             </button>
           </div>
         </div>
-        <div className="w-[50%] mt-14">
-          <img src={pizzaimg} alt="" width={550} height={550} />
+        <div className="w-[50%] mt-14  aspect-auto">
+          <img
+            src={pizzaimg}
+            alt=""
+            //  width={550} height={550}
+          />
         </div>
       </section>
 
-     
+      <section className=" product-listing bg-[#FBF8F7] pt-8">
+        <div className="container">
+          <div id="search" className="flex justify-between pt-5 pb-5 w-full">
+            <div className="bg-white flex justify-evenly p-2 rounded-lg w-[25%]">
+              <button className="inline-flex items-center gap-2 rounded-md px-4 py-1 text-sm  border-x border-y !border-orange-500 font-bold hover:bg-[#FBF8F7]">
+                Pizza
+              </button>
+
+              <button className="inline-flex items-center gap-2 rounded-md  px-4 py-1 text-sm  focus:relative">
+                Softdrinks
+              </button>
+
+              <button className="inline-flex items-center gap-2 rounded-md  px-4 py-1 text-sm   focus:relative ">
+                Sauces
+              </button>
+            </div>
+            <div className="relative flex items-center w-[40%]">
+              <IoIosSearch className="absolute left-5" />
+              <input
+                type="text"
+                className="p-[10px] w-full rounded-lg focus:outline-none"
+              />
+            </div>
+
+            <div className="w-[25%]">
+              <Select
+                classNamePrefix="react-select"
+                options={dietTypes}
+                style={customStyles}
+              />
+            </div>
+          </div>
+          <div className="product-listing ">
+            <div className="grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 items-center">
+              <div className="h-[345px] w-[284px] rounded-lg bg-white flex justify-center ">
+                <div className="w-[85%] ">
+                  <div className="h-[65%]">
+                    <GiChiliPepper
+                      size={25}
+                      className="ml-auto mt-3 mr-[-11px]"
+                      color="red"
+                    />
+                    <img
+                      src={margheritaLogo}
+                      alt=""
+                      srcset=""
+                      className="my-0 mx-auto mt-[10px]"
+                    />
+                    <div>
+                      <h3 className="font-bold mb-2">Margrita</h3>
+                      <p className="text-xs">
+                        Juicy chicken fillet and crispy bacon combined with
+                        signature tomato sauce, Mozzarella and onions
+                      </p>
+                    </div>
+                  </div>
+                  <div className="h-[35%] flex justify-evenly flex-col">
+                    <div className="flex">
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
+                        S
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        M
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        L
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold">$500</p>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
+                        +
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
+                <div className="w-[85%] ">
+                  <div className="h-[65%]">
+                    <GiChiliPepper
+                      size={25}
+                      className="ml-auto mt-3 mr-[-11px]"
+                      color="red"
+                    />
+                    <img
+                      src={pepperoni}
+                      alt=""
+                      srcset=""
+                      className="my-0 mx-auto mt-[10px]"
+                    />
+                    <div>
+                      <h3 className="font-bold mb-2">Pepperoni</h3>
+                      <p className="text-xs">
+                        Juicy chicken fillet and crispy bacon combined with
+                        signature tomato sauce, Mozzarella and onions
+                      </p>
+                    </div>
+                  </div>
+                  <div className="h-[35%] flex justify-evenly flex-col">
+                    <div className="flex">
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
+                        S
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        M
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        L
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold">$500</p>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
+                        +
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
+                <div className="w-[85%] ">
+                  <div className="h-[65%]">
+                    <GiChiliPepper
+                      size={25}
+                      className="ml-auto mt-3 mr-[-11px]"
+                      color="red"
+                    />
+                    <img
+                      src={carbonara}
+                      alt=""
+                      srcset=""
+                      className="my-0 mx-auto mt-[10px]"
+                    />
+                    <div>
+                      <h3 className="font-bold mb-2">Chicken</h3>
+                      <p className="text-xs">
+                        Juicy chicken fillet and crispy bacon combined with
+                        signature tomato sauce, Mozzarella and onions
+                      </p>
+                    </div>
+                  </div>
+                  <div className="h-[35%] flex justify-evenly flex-col">
+                    <div className="flex">
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
+                        S
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        M
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        L
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold">$500</p>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
+                        +
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
+                <div className="w-[85%] ">
+                  <div className="h-[65%]">
+                    <GiChiliPepper
+                      size={25}
+                      className="ml-auto mt-3 mr-[-11px]"
+                      color="red"
+                    />
+                    <img
+                      src={Chicken}
+                      alt=""
+                      srcset=""
+                      className="my-0 mx-auto mt-[10px]"
+                    />
+                    <div>
+                      <h3 className="font-bold mb-2">BBQ Fresh</h3>
+                      <p className="text-xs">
+                        Juicy chicken fillet and crispy bacon combined with
+                        signature tomato sauce, Mozzarella and onions
+                      </p>
+                    </div>
+                  </div>
+                  <div className="h-[35%] flex justify-evenly flex-col">
+                    <div className="flex">
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
+                        S
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        M
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        L
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold">$500</p>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
+                        +
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
+                <div className="w-[85%] ">
+                  <div className="h-[65%]">
+                    <GiChiliPepper
+                      size={25}
+                      className="ml-auto mt-3 mr-[-11px]"
+                      color="red"
+                    />
+                    <img
+                      src={pepperoni}
+                      alt=""
+                      srcset=""
+                      className="my-0 mx-auto mt-[10px]"
+                    />
+                    <div>
+                      <h3 className="font-bold mb-2">Margarita</h3>
+                      <p className="text-xs">
+                        Juicy chicken fillet and crispy bacon combined with
+                        signature tomato sauce, Mozzarella and onions
+                      </p>
+                    </div>
+                  </div>
+                  <div className="h-[35%] flex justify-evenly flex-col">
+                    <div className="flex">
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
+                        S
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        M
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        L
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold">$500</p>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
+                        +
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
+                <div className="w-[85%] ">
+                  <div className="h-[65%]">
+                    <GiChiliPepper
+                      size={25}
+                      className="ml-auto mt-3 mr-[-11px]"
+                      color="red"
+                    />
+                    <img
+                      src={carbonara}
+                      alt=""
+                      srcset=""
+                      className="my-0 mx-auto mt-[10px]"
+                    />
+                    <div>
+                      <h3 className="font-bold mb-2">Margarita</h3>
+                      <p className="text-xs">
+                        Juicy chicken fillet and crispy bacon combined with
+                        signature tomato sauce, Mozzarella and onions
+                      </p>
+                    </div>
+                  </div>
+                  <div className="h-[35%] flex justify-evenly flex-col">
+                    <div className="flex">
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
+                        S
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        M
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        L
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold">$500</p>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
+                        +
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
+                <div className="w-[85%] ">
+                  <div className="h-[65%]">
+                    <GiChiliPepper
+                      size={25}
+                      className="ml-auto mt-3 mr-[-11px]"
+                      color="red"
+                    />
+                    <img
+                      src={margheritaLogo}
+                      alt=""
+                      srcset=""
+                      className="my-0 mx-auto mt-[10px]"
+                    />
+                    <div>
+                      <h3 className="font-bold mb-2">Margarita</h3>
+                      <p className="text-xs">
+                        Juicy chicken fillet and crispy bacon combined with
+                        signature tomato sauce, Mozzarella and onions
+                      </p>
+                    </div>
+                  </div>
+                  <div className="h-[35%] flex justify-evenly flex-col">
+                    <div className="flex">
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
+                        S
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        M
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        L
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold">$500</p>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
+                        +
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
+                <div className="w-[85%] ">
+                  <div className="h-[65%]">
+                    <GiChiliPepper
+                      size={25}
+                      className="ml-auto mt-3 mr-[-11px]"
+                      color="red"
+                    />
+                    <img
+                      src={Chicken}
+                      alt=""
+                      srcset=""
+                      className="my-0 mx-auto mt-[10px]"
+                    />
+                    <div>
+                      <h3 className="font-bold mb-2">Margarita</h3>
+                      <p className="text-xs">
+                        Juicy chicken fillet and crispy bacon combined with
+                        signature tomato sauce, Mozzarella and onions
+                      </p>
+                    </div>
+                  </div>
+                  <div className="h-[35%] flex justify-evenly flex-col">
+                    <div className="flex">
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
+                        S
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        M
+                      </span>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                        L
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold">$500</p>
+                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
+                        +
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   )
 }
