@@ -1,59 +1,115 @@
-import { useState } from 'react'
-import Logo from './assets/images/Logo.svg'
-import pizzaimg from './assets/images/Pizza Image.png'
-import margheritaLogo from './assets/images/Margherita-Traditional 1.png'
-import pepperoni from './assets/images/Pepperoni-Traditional 1.png'
-import carbonara from './assets/images/carbonara 2.jpg'
-import Chicken from './assets/images/Chicken BBQ.png'
-import { IoMdBasket, IoMdCall, IoIosSearch } from 'react-icons/io'
-import { GoArrowRight } from 'react-icons/go'
-import { GiChiliPepper } from 'react-icons/gi'
-import Select from 'react-select'
-import './App.css'
+import { useState } from "react";
+import Logo from "./assets/images/Logo.svg";
+import pizzaimg from "./assets/images/Pizza Image.png";
+import margheritaLogo from "./assets/images/Margherita-Traditional 1.png";
+import pepperoni from "./assets/images/Pepperoni-Traditional 1.png";
+import carbonara from "./assets/images/carbonara 2.jpg";
+import Chicken from "./assets/images/Chicken BBQ.png";
+import { IoMdBasket, IoMdCall, IoIosSearch } from "react-icons/io";
+import { GoArrowRight } from "react-icons/go";
+import { GiChiliPepper } from "react-icons/gi";
+import Select from "react-select";
+import "./App.css";
+import { FaHamburger, FaTimes } from "react-icons/fa";
 
 const options = [
-  { value: 'bhuj', label: 'Bhuj' },
-  { value: 'mumbai', label: 'Mumbai' },
-  { value: 'gandhinagar', label: 'Gandhinagar' },
-]
+  { value: "bhuj", label: "Bhuj" },
+  { value: "mumbai", label: "Mumbai" },
+  { value: "gandhinagar", label: "Gandhinagar" },
+];
 
 const dietTypes = [
-  { value: 'vegan', label: 'Vegan' },
-  { value: 'vegeterian', label: 'Vegeterian' },
-  { value: 'non-vegeterian', label: 'Non Vegeterian' },
-]
+  { value: "vegan", label: "Vegan" },
+  { value: "vegeterian", label: "Vegeterian" },
+  { value: "non-vegeterian", label: "Non Vegeterian" },
+];
 
 const customStyles = {
-  control: (provided, state) => ({
+  control: (provided) => ({
     ...provided,
     // border: 'none', // Remove the border
-    boxShadow: 'none', // Remove the box-shadow
+    boxShadow: "none", // Remove the box-shadow
     // outline: 'none', // Remove the outline
   }),
-}
+};
+
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div className="font-manrope font-medium">
       <header>
-        <div className="container flex justify-between items-center h-16 ">
-          <div className="w-[50%] flex ">
+        <div className="container flex  justify-between items-center h-16 ">
+          <div className="w-full md:w-[50%] flex items-center justify-between ">
             <img src={Logo} alt="" className="cursor-pointer" />
             <Select
-              className="pl-10"
+              className="pl-1"
               classNamePrefix="react-select"
               options={options}
             />
+            <FaHamburger
+              size={36}
+              className="text-orange-500 md:hidden"
+              onClick={() => toggleMenu()}
+            />
           </div>
-          <div className="w-[50%] flex justify-between ">
-            <div className="flex">
-              <a href="#">Menu</a>
-              <a href="#">Orders</a>
-              <a href="#">Login</a>
-              <IoMdBasket className="basket cursor-pointer" />
+          <div
+            className={`hidden  w-full sm:hidden md:flex  justify-end  bg-white  z-50`}
+          >
+            <div className="h-[80%] w-[80%] md:w-[100%] lg:w-[80%]  flex  justify-between items-center">
+              <div className="flex  h-[50%] justify-between items-center">
+                <a href="#">Menu</a>
+                <a href="#">Orders</a>
+                <a href="#">Login</a>
+                <IoMdBasket
+                  size={24}
+                  className="basket cursor-pointer text-orange-500 !pt-0"
+                />
+              </div>
+              <div className="flex">
+                <IoMdCall
+                  size={96}
+                  className="call cursor-pointer text-orange-500 !pt-0"
+                />
+                <span className="">+91 8780410278</span>
+              </div>
             </div>
-            <div className="flex">
-              <IoMdCall className="call cursor-pointer" />
-              <span className="">+91 8780410278</span>
+          </div>
+
+          {/* mobile menu  */}
+          <div
+            className={`fixed top-0 left-0 h-screen w-full flex flex-col bg-white transition-transform duration-300 ${
+              isOpen ? "translate-x-0" : "-translate-x-full"
+            } md:hidden z-50`}
+          >
+            <div className="flex justify-end">
+              {" "}
+              <FaTimes
+                size={24}
+                onClick={() => toggleMenu()}
+                className="block md:hidden top-0 right-0 mr-8 mt-8 text-orange-500"
+              />
+            </div>
+            <div className="h-[80%] flex flex-col justify-evenly items-center">
+              <div className="flex flex-col h-[50%] justify-around items-center">
+                <a href="#">Menu</a>
+                <a href="#">Orders</a>
+                <a href="#">Login</a>
+                <IoMdBasket
+                  size={96}
+                  className="basket cursor-pointer text-orange-500"
+                />
+              </div>
+              <div className="flex">
+                <IoMdCall
+                  size={96}
+                  className="call cursor-pointer text-orange-500"
+                />
+                <span className="">+91 8780410278</span>
+              </div>
             </div>
           </div>
         </div>
@@ -72,7 +128,7 @@ function App() {
           <div className="mt-2">
             <button className="border-4 font-manrope text-white pr-6 pl-3  h-16 bg-orange-500 font-semibold text-2xl mt-3 rounded-2xl border-orange-500 ">
               Order Now
-              <GoArrowRight className=" inline size-8 ml-2" />{' '}
+              <GoArrowRight className=" inline size-8 ml-2" />{" "}
             </button>
           </div>
         </div>
@@ -130,7 +186,6 @@ function App() {
                     <img
                       src={margheritaLogo}
                       alt=""
-                      srcset=""
                       className="my-0 mx-auto mt-[10px]"
                     />
                     <div>
@@ -173,7 +228,6 @@ function App() {
                     <img
                       src={pepperoni}
                       alt=""
-                      srcset=""
                       className="my-0 mx-auto mt-[10px]"
                     />
                     <div>
@@ -216,7 +270,6 @@ function App() {
                     <img
                       src={carbonara}
                       alt=""
-                      srcset=""
                       className="my-0 mx-auto mt-[10px]"
                     />
                     <div>
@@ -259,7 +312,6 @@ function App() {
                     <img
                       src={Chicken}
                       alt=""
-                      srcset=""
                       className="my-0 mx-auto mt-[10px]"
                     />
                     <div>
@@ -303,7 +355,6 @@ function App() {
                     <img
                       src={pepperoni}
                       alt=""
-                      srcset=""
                       className="my-0 mx-auto mt-[10px]"
                     />
                     <div>
@@ -347,7 +398,6 @@ function App() {
                     <img
                       src={carbonara}
                       alt=""
-                      srcset=""
                       className="my-0 mx-auto mt-[10px]"
                     />
                     <div>
@@ -391,7 +441,6 @@ function App() {
                     <img
                       src={margheritaLogo}
                       alt=""
-                      srcset=""
                       className="my-0 mx-auto mt-[10px]"
                     />
                     <div>
@@ -434,7 +483,6 @@ function App() {
                     <img
                       src={Chicken}
                       alt=""
-                      srcset=""
                       className="my-0 mx-auto mt-[10px]"
                     />
                     <div>
@@ -479,7 +527,7 @@ function App() {
       <br />
       <br />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
