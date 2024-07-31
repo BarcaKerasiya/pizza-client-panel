@@ -1,51 +1,36 @@
-import { useState } from 'react'
-import Logo from './assets/images/Logo.svg'
-import pizzaimg from './assets/images/Pizza Image.png'
-import margheritaLogo from './assets/images/Margherita-Traditional 1.png'
-import pepperoni from './assets/images/Pepperoni-Traditional 1.png'
-import carbonara from './assets/images/carbonara 2.jpg'
-import Chicken from './assets/images/Chicken BBQ.png'
-import { IoMdBasket, IoMdCall, IoIosSearch } from 'react-icons/io'
-import { GoArrowRight } from 'react-icons/go'
-import { GiChiliPepper } from 'react-icons/gi'
-import Select from 'react-select'
-import './App.css'
-import { FaHamburger, FaTimes } from 'react-icons/fa'
-
-const options = [
-  { value: 'bhuj', label: 'Bhuj' },
-  { value: 'mumbai', label: 'Mumbai' },
-  { value: 'gandhinagar', label: 'Gandhinagar' },
-]
-
-const dietTypes = [
-  { value: 'vegan', label: 'Vegan' },
-  { value: 'vegeterian', label: 'Vegeterian' },
-  { value: 'non-vegeterian', label: 'Non Vegeterian' },
-]
-
-const dietCategories = [
-  { value: 'pizza', label: 'Pizza' },
-  { value: 'softdrinks', label: 'Soft Drinks' },
-  { value: 'sauces', label: 'Sauces' },
-]
+import { useState } from "react";
+import Logo from "./assets/images/Logo.svg";
+import pizzaimg from "./assets/images/Pizza Image.png";
+import { IoMdBasket, IoMdCall, IoIosSearch } from "react-icons/io";
+import { GoArrowRight } from "react-icons/go";
+import { GiChiliPepper } from "react-icons/gi";
+import Select from "react-select";
+import "./App.css";
+import { FaHamburger, FaTimes } from "react-icons/fa";
+import { dietCategories, dietTypes, options, pizzaList } from "./data";
 
 const customStyles = {
   control: (provided) => ({
     ...provided,
     // border: 'none', // Remove the border
-    boxShadow: 'none', // Remove the box-shadow
+    boxShadow: "none", // Remove the box-shadow
     // outline: 'none', // Remove the outline
   }),
-}
+};
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [dietCategory, setDietCategory] = useState(dietCategories[0].value)
-
+  const [data, setData] = useState(pizzaList);
+  const [isOpen, setIsOpen] = useState(false);
+  const [dietCategory, setDietCategory] = useState(dietCategories[0].value);
+  console.log("diet", dietCategory);
   const toggleMenu = () => {
-    setIsOpen(!isOpen)
-  }
+    setIsOpen(!isOpen);
+  };
+
+  const handleDietCategory = (item) => {
+    setDietCategory(item.value);
+    console.log("item", item);
+  };
   return (
     <div className="font-manrope font-medium">
       <header>
@@ -89,11 +74,11 @@ function App() {
           {/* mobile menu  */}
           <div
             className={`fixed top-0 left-0 h-screen w-full flex flex-col bg-white transition-transform duration-300 ${
-              isOpen ? 'translate-x-0' : '-translate-x-full'
+              isOpen ? "translate-x-0" : "-translate-x-full"
             } md:hidden z-50`}
           >
             <div className="flex justify-end">
-              {' '}
+              {" "}
               <FaTimes
                 size={24}
                 onClick={() => toggleMenu()}
@@ -138,7 +123,7 @@ function App() {
           <div className="mt-2">
             <button className="border-4  font-manrope text-white pr-2 pl-2   h-10 bg-orange-500 font-semibold text-xs mt-1 rounded-2xl border-orange-500 ">
               Order Now
-              <GoArrowRight className=" inline size-3 md:size-4 " />{' '}
+              <GoArrowRight className=" inline size-3 md:size-4 " />{" "}
             </button>
           </div>
         </div>
@@ -151,26 +136,31 @@ function App() {
         </div>
       </section>
 
-      <section className=" product-listing bg-[#FBF8F7] pt-1">
+      <section className=" product-listing bg-[#FBF8F7] py-16">
         <div className="container">
           <div
             id="search"
-            className="flex justify-between pt-1 pb-4 w-full flex-col-reverse gap-4 md:flex-row"
+            className="flex justify-between items-center w-full flex-col-reverse gap-4 md:flex-row"
           >
-            <div className="bg-white flex justify-evenly p-2 rounded-lg w-[100%]">
-              <button className="inline-flex items-center gap-3 rounded-md px-4 py-1 text-sm  border-x border-y !border-orange-500 font-bold hover:bg-[#FBF8F7]">
-                Pizza
-              </button>
-
-              <button className="inline-flex items-center gap-2 rounded-md  px-4 py-1 text-sm  focus:relative">
-                Softdrinks
-              </button>
-
-              <button className="inline-flex items-center gap-2 rounded-md  px-4 py-1 text-sm   focus:relative ">
-                Sauces
-              </button>
+            <div className="bg-white flex justify-evenly rounded-lg w-[100%]">
+              {dietCategories.map((item, index) => {
+                // console.log(item.value);
+                return (
+                  <button
+                    onClick={() => handleDietCategory(item)}
+                    key={item + index}
+                    className={`${
+                      item.value === dietCategory
+                        ? "border-x border-y !border-orange-500"
+                        : ""
+                    } inline-flex items-center gap-3 rounded-md px-4 py-1 text-sm  font-bold hover:bg-[#FBF8F7]`}
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
             </div>
-            <div className="relative flex items-center w-[100%] mt-1">
+            <div className="relative flex items-center w-[100%]">
               <IoIosSearch className="absolute left-5" />
               <input
                 type="text"
@@ -185,361 +175,67 @@ function App() {
               />
             </div>
           </div>
-          <div className="product-listing ">
-            <div className="grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 items-center place-items-center">
-              <div className="h-[345px] w-[284px] rounded-lg bg-white flex justify-center ">
-                <div className="w-[85%] ">
-                  <div className="h-[65%]">
-                    <GiChiliPepper
-                      size={25}
-                      className="ml-auto mt-3 mr-[-11px]"
-                      color="red"
-                    />
-                    <img
-                      src={margheritaLogo}
-                      alt=""
-                      className="my-0 mx-auto mt-[10px]"
-                    />
-                    <div>
-                      <h3 className="font-bold mb-2">Margrita</h3>
-                      <p className="text-xs">
-                        Juicy chicken fillet and crispy bacon combined with
-                        signature tomato sauce, Mozzarella and onions
-                      </p>
+          <div className="product-listing pt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4   gap-8 items-center place-items-center">
+              {data.map((item) => {
+                return (
+                  <>
+                    <div
+                      key={item.id}
+                      className="h-[345px] w-[284px] rounded-lg bg-white flex justify-center "
+                    >
+                      <div className="w-[85%] ">
+                        <div className="h-[65%]">
+                          <GiChiliPepper
+                            size={25}
+                            className="ml-auto mt-3 mr-[-11px]"
+                            color="red"
+                          />
+                          <img
+                            src={item.image}
+                            alt=""
+                            className="my-0 mx-auto mt-[10px]"
+                          />
+                          <div>
+                            <h3 className="font-bold mb-2">{item.name}</h3>
+                            <p className="text-xs">{item.description}</p>
+                          </div>
+                        </div>
+                        <div className="h-[35%] flex justify-evenly flex-col">
+                          <div className="flex">
+                            <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
+                              S
+                            </span>
+                            <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                              M
+                            </span>
+                            <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
+                              L
+                            </span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <p className="font-bold">{item.price}</p>
+                            <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
+                              +
+                            </span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="h-[35%] flex justify-evenly flex-col">
-                    <div className="flex">
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
-                        S
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        M
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        L
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <p className="font-bold">$500</p>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
-                        +
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
-                <div className="w-[85%] ">
-                  <div className="h-[65%]">
-                    <GiChiliPepper
-                      size={25}
-                      className="ml-auto mt-3 mr-[-11px]"
-                      color="red"
-                    />
-                    <img
-                      src={pepperoni}
-                      alt=""
-                      className="my-0 mx-auto mt-[10px]"
-                    />
-                    <div>
-                      <h3 className="font-bold mb-2">Pepperoni</h3>
-                      <p className="text-xs">
-                        Juicy chicken fillet and crispy bacon combined with
-                        signature tomato sauce, Mozzarella and onions
-                      </p>
-                    </div>
-                  </div>
-                  <div className="h-[35%] flex justify-evenly flex-col">
-                    <div className="flex">
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
-                        S
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        M
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        L
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <p className="font-bold">$500</p>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
-                        +
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
-                <div className="w-[85%] ">
-                  <div className="h-[65%]">
-                    <GiChiliPepper
-                      size={25}
-                      className="ml-auto mt-3 mr-[-11px]"
-                      color="red"
-                    />
-                    <img
-                      src={carbonara}
-                      alt=""
-                      className="my-0 mx-auto mt-[10px]"
-                    />
-                    <div>
-                      <h3 className="font-bold mb-2">Chicken</h3>
-                      <p className="text-xs">
-                        Juicy chicken fillet and crispy bacon combined with
-                        signature tomato sauce, Mozzarella and onions
-                      </p>
-                    </div>
-                  </div>
-                  <div className="h-[35%] flex justify-evenly flex-col">
-                    <div className="flex">
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
-                        S
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        M
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        L
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <p className="font-bold">$500</p>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
-                        +
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
-                <div className="w-[85%] ">
-                  <div className="h-[65%]">
-                    <GiChiliPepper
-                      size={25}
-                      className="ml-auto mt-3 mr-[-11px]"
-                      color="red"
-                    />
-                    <img
-                      src={Chicken}
-                      alt=""
-                      className="my-0 mx-auto mt-[10px]"
-                    />
-                    <div>
-                      <h3 className="font-bold mb-2">BBQ Fresh</h3>
-                      <p className="text-xs">
-                        Juicy chicken fillet and crispy bacon combined with
-                        signature tomato sauce, Mozzarella and onions
-                      </p>
-                    </div>
-                  </div>
-                  <div className="h-[35%] flex justify-evenly flex-col">
-                    <div className="flex">
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
-                        S
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        M
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        L
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <p className="font-bold">$500</p>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
-                        +
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
-                <div className="w-[85%] ">
-                  <div className="h-[65%]">
-                    <GiChiliPepper
-                      size={25}
-                      className="ml-auto mt-3 mr-[-11px]"
-                      color="red"
-                    />
-                    <img
-                      src={pepperoni}
-                      alt=""
-                      className="my-0 mx-auto mt-[10px]"
-                    />
-                    <div>
-                      <h3 className="font-bold mb-2">Margarita</h3>
-                      <p className="text-xs">
-                        Juicy chicken fillet and crispy bacon combined with
-                        signature tomato sauce, Mozzarella and onions
-                      </p>
-                    </div>
-                  </div>
-                  <div className="h-[35%] flex justify-evenly flex-col">
-                    <div className="flex">
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
-                        S
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        M
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        L
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <p className="font-bold">$500</p>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
-                        +
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
-                <div className="w-[85%] ">
-                  <div className="h-[65%]">
-                    <GiChiliPepper
-                      size={25}
-                      className="ml-auto mt-3 mr-[-11px]"
-                      color="red"
-                    />
-                    <img
-                      src={carbonara}
-                      alt=""
-                      className="my-0 mx-auto mt-[10px]"
-                    />
-                    <div>
-                      <h3 className="font-bold mb-2">Margarita</h3>
-                      <p className="text-xs">
-                        Juicy chicken fillet and crispy bacon combined with
-                        signature tomato sauce, Mozzarella and onions
-                      </p>
-                    </div>
-                  </div>
-                  <div className="h-[35%] flex justify-evenly flex-col">
-                    <div className="flex">
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
-                        S
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        M
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        L
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <p className="font-bold">$500</p>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
-                        +
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
-                <div className="w-[85%] ">
-                  <div className="h-[65%]">
-                    <GiChiliPepper
-                      size={25}
-                      className="ml-auto mt-3 mr-[-11px]"
-                      color="red"
-                    />
-                    <img
-                      src={margheritaLogo}
-                      alt=""
-                      className="my-0 mx-auto mt-[10px]"
-                    />
-                    <div>
-                      <h3 className="font-bold mb-2">Margarita</h3>
-                      <p className="text-xs">
-                        Juicy chicken fillet and crispy bacon combined with
-                        signature tomato sauce, Mozzarella and onions
-                      </p>
-                    </div>
-                  </div>
-                  <div className="h-[35%] flex justify-evenly flex-col">
-                    <div className="flex">
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
-                        S
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        M
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        L
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <p className="font-bold">$500</p>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
-                        +
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className=" h-[345px] w-[284px] rounded-lg bg-white flex justify-center">
-                <div className="w-[85%] ">
-                  <div className="h-[65%]">
-                    <GiChiliPepper
-                      size={25}
-                      className="ml-auto mt-3 mr-[-11px]"
-                      color="red"
-                    />
-                    <img
-                      src={Chicken}
-                      alt=""
-                      className="my-0 mx-auto mt-[10px]"
-                    />
-                    <div>
-                      <h3 className="font-bold mb-2">Margarita</h3>
-                      <p className="text-xs">
-                        Juicy chicken fillet and crispy bacon combined with
-                        signature tomato sauce, Mozzarella and onions
-                      </p>
-                    </div>
-                  </div>
-                  <div className="h-[35%] flex justify-evenly flex-col">
-                    <div className="flex">
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 !mr-2 text-center text-white !text-sm">
-                        S
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        M
-                      </span>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-[#EDEDED] !mr-2 text-center !text-sm">
-                        L
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <p className="font-bold">$500</p>
-                      <span className="flex justify-center items-center rounded-full w-[30px] h-[30px] bg-orange-500 mr-2 text-center text-white">
-                        +
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  </>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <footer className="h-16 bg-[#361904]">
+        <div className="container flex items-center h-full">
+          <p className="text-white">All rights reserved @Pizza by Barca 2024</p>
+        </div>
+      </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
