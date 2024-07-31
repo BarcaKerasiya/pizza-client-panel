@@ -1,44 +1,51 @@
-import { useState } from "react";
-import Logo from "./assets/images/Logo.svg";
-import pizzaimg from "./assets/images/Pizza Image.png";
-import margheritaLogo from "./assets/images/Margherita-Traditional 1.png";
-import pepperoni from "./assets/images/Pepperoni-Traditional 1.png";
-import carbonara from "./assets/images/carbonara 2.jpg";
-import Chicken from "./assets/images/Chicken BBQ.png";
-import { IoMdBasket, IoMdCall, IoIosSearch } from "react-icons/io";
-import { GoArrowRight } from "react-icons/go";
-import { GiChiliPepper } from "react-icons/gi";
-import Select from "react-select";
-import "./App.css";
-import { FaHamburger, FaTimes } from "react-icons/fa";
+import { useState } from 'react'
+import Logo from './assets/images/Logo.svg'
+import pizzaimg from './assets/images/Pizza Image.png'
+import margheritaLogo from './assets/images/Margherita-Traditional 1.png'
+import pepperoni from './assets/images/Pepperoni-Traditional 1.png'
+import carbonara from './assets/images/carbonara 2.jpg'
+import Chicken from './assets/images/Chicken BBQ.png'
+import { IoMdBasket, IoMdCall, IoIosSearch } from 'react-icons/io'
+import { GoArrowRight } from 'react-icons/go'
+import { GiChiliPepper } from 'react-icons/gi'
+import Select from 'react-select'
+import './App.css'
+import { FaHamburger, FaTimes } from 'react-icons/fa'
 
 const options = [
-  { value: "bhuj", label: "Bhuj" },
-  { value: "mumbai", label: "Mumbai" },
-  { value: "gandhinagar", label: "Gandhinagar" },
-];
+  { value: 'bhuj', label: 'Bhuj' },
+  { value: 'mumbai', label: 'Mumbai' },
+  { value: 'gandhinagar', label: 'Gandhinagar' },
+]
 
 const dietTypes = [
-  { value: "vegan", label: "Vegan" },
-  { value: "vegeterian", label: "Vegeterian" },
-  { value: "non-vegeterian", label: "Non Vegeterian" },
-];
+  { value: 'vegan', label: 'Vegan' },
+  { value: 'vegeterian', label: 'Vegeterian' },
+  { value: 'non-vegeterian', label: 'Non Vegeterian' },
+]
+
+const dietCategories = [
+  { value: 'pizza', label: 'Pizza' },
+  { value: 'softdrinks', label: 'Soft Drinks' },
+  { value: 'sauces', label: 'Sauces' },
+]
 
 const customStyles = {
   control: (provided) => ({
     ...provided,
     // border: 'none', // Remove the border
-    boxShadow: "none", // Remove the box-shadow
+    boxShadow: 'none', // Remove the box-shadow
     // outline: 'none', // Remove the outline
   }),
-};
+}
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const [dietCategory, setDietCategory] = useState(dietCategories[0].value)
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+    setIsOpen(!isOpen)
+  }
   return (
     <div className="font-manrope font-medium">
       <header>
@@ -82,11 +89,11 @@ function App() {
           {/* mobile menu  */}
           <div
             className={`fixed top-0 left-0 h-screen w-full flex flex-col bg-white transition-transform duration-300 ${
-              isOpen ? "translate-x-0" : "-translate-x-full"
+              isOpen ? 'translate-x-0' : '-translate-x-full'
             } md:hidden z-50`}
           >
             <div className="flex justify-end">
-              {" "}
+              {' '}
               <FaTimes
                 size={24}
                 onClick={() => toggleMenu()}
@@ -114,7 +121,10 @@ function App() {
           </div>
         </div>
       </header>
-      <section id="hero" className="flex flex-col-reverse items-center container md:flex-row">
+      <section
+        id="hero"
+        className="flex flex-col-reverse items-center container md:flex-row"
+      >
         <div className="flex flex-col w-[50%] p-4 mt-8">
           <h1 className="text-4xl font-bold mt-0 font-manrope leading-10 text-gray-700  lg:text-5xl">
             Get yummy pizza <br /> in
@@ -128,7 +138,7 @@ function App() {
           <div className="mt-2">
             <button className="border-4  font-manrope text-white pr-2 pl-2   h-10 bg-orange-500 font-semibold text-xs mt-1 rounded-2xl border-orange-500 ">
               Order Now
-              <GoArrowRight className=" inline size-3 md:size-4 " />{" "}
+              <GoArrowRight className=" inline size-3 md:size-4 " />{' '}
             </button>
           </div>
         </div>
@@ -143,7 +153,10 @@ function App() {
 
       <section className=" product-listing bg-[#FBF8F7] pt-1">
         <div className="container">
-          <div id="search" className="flex justify-between pt-1 pb-4 w-full flex-col-reverse gap-4">
+          <div
+            id="search"
+            className="flex justify-between pt-1 pb-4 w-full flex-col-reverse gap-4 md:flex-row"
+          >
             <div className="bg-white flex justify-evenly p-2 rounded-lg w-[100%]">
               <button className="inline-flex items-center gap-3 rounded-md px-4 py-1 text-sm  border-x border-y !border-orange-500 font-bold hover:bg-[#FBF8F7]">
                 Pizza
@@ -163,7 +176,6 @@ function App() {
                 type="text"
                 className="p-[10px] w-full rounded-lg focus:outline-none"
               />
-            
             </div>
             <div className="w-[100%] ">
               <Select
@@ -172,12 +184,9 @@ function App() {
                 style={customStyles}
               />
             </div>
-            
-            
-
           </div>
           <div className="product-listing ">
-            <div className="grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 items-center">
+            <div className="grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 items-center place-items-center">
               <div className="h-[345px] w-[284px] rounded-lg bg-white flex justify-center ">
                 <div className="w-[85%] ">
                   <div className="h-[65%]">
@@ -530,7 +539,7 @@ function App() {
       <br />
       <br />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
