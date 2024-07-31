@@ -114,38 +114,38 @@ function App() {
           </div>
         </div>
       </header>
-      <section id="hero" className="flex container">
-        <div className="flex flex-col w-[50%] p-4 mt-20">
-          <h1 className="text-6xl font-bold mt-20 font-manrope leading-tight text-gray-700">
+      <section id="hero" className="flex flex-col-reverse items-center container md:flex-row">
+        <div className="flex flex-col w-[50%] p-4 mt-8">
+          <h1 className="text-4xl font-bold mt-0 font-manrope leading-10 text-gray-700  lg:text-5xl">
             Get yummy pizza <br /> in
-            <p className="text-5xl font-bold  font-manrope leading-tight inline ml-3 text-orange-500">
+            <p className="text-4xl font-bold  font-manrope leading-10 inline ml-3 text-orange-500">
               30 min
             </p>
           </h1>
-          <p className="mt-3 text-2xl font-manrope font-light">
+          <p className="mt-3 text-xl font-manrope font-8 md:text-2xl ">
             No need to pay if, order took <br /> more than 30 min
           </p>
           <div className="mt-2">
-            <button className="border-4 font-manrope text-white pr-6 pl-3  h-16 bg-orange-500 font-semibold text-2xl mt-3 rounded-2xl border-orange-500 ">
+            <button className="border-4  font-manrope text-white pr-2 pl-2   h-10 bg-orange-500 font-semibold text-xs mt-1 rounded-2xl border-orange-500 ">
               Order Now
-              <GoArrowRight className=" inline size-8 ml-2" />{" "}
+              <GoArrowRight className=" inline size-3 md:size-4 " />{" "}
             </button>
           </div>
         </div>
-        <div className="w-[50%] mt-14  aspect-auto">
+        <div className="w-[50%] mt-9 aspect-square">
           <img
             src={pizzaimg}
             alt=""
-            //  width={550} height={550}
+            //  width={200} height={200}
           />
         </div>
       </section>
 
-      <section className=" product-listing bg-[#FBF8F7] pt-8">
+      <section className=" product-listing bg-[#FBF8F7] pt-1">
         <div className="container">
-          <div id="search" className="flex justify-between pt-5 pb-5 w-full">
-            <div className="bg-white flex justify-evenly p-2 rounded-lg w-[25%]">
-              <button className="inline-flex items-center gap-2 rounded-md px-4 py-1 text-sm  border-x border-y !border-orange-500 font-bold hover:bg-[#FBF8F7]">
+          <div id="search" className="flex justify-between pt-1 pb-4 w-full flex-col-reverse gap-4">
+            <div className="bg-white flex justify-evenly p-2 rounded-lg w-[100%]">
+              <button className="inline-flex items-center gap-3 rounded-md px-4 py-1 text-sm  border-x border-y !border-orange-500 font-bold hover:bg-[#FBF8F7]">
                 Pizza
               </button>
 
@@ -157,21 +157,24 @@ function App() {
                 Sauces
               </button>
             </div>
-            <div className="relative flex items-center w-[40%]">
+            <div className="relative flex items-center w-[100%] mt-1">
               <IoIosSearch className="absolute left-5" />
               <input
                 type="text"
                 className="p-[10px] w-full rounded-lg focus:outline-none"
               />
+            
             </div>
-
-            <div className="w-[25%]">
+            <div className="w-[100%] ">
               <Select
                 classNamePrefix="react-select"
                 options={dietTypes}
                 style={customStyles}
               />
             </div>
+            
+            
+
           </div>
           <div className="product-listing ">
             <div className="grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 items-center">
